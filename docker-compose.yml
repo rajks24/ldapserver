@@ -3,7 +3,7 @@ services:
   openldap:
     image: osixia/openldap:1.5.0
     command: "--loglevel info"
-    container_name: openldap
+    container_name: ldapserver
     hostname: ldapserver
     ports:
       - "389:389"
@@ -38,7 +38,7 @@ services:
     ports:
       - "8000:80"
     environment:
-      - PHPLDAPADMIN_LDAP_HOSTS=openldap
+      - PHPLDAPADMIN_LDAP_HOSTS=ldapserver
       - PHPLDAPADMIN_HTTPS=false
     depends_on:
       - openldap

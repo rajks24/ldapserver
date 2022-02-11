@@ -30,7 +30,7 @@ sudo yum install -y openldap openldap-clients openldap-servers
 ```
 2. To get ldapserver cacert either we can copy from container, or use the extracted cacert from this repo
 ```
-docker exec openldap cat /container/service/:ssl-tools/assets/default-ca/default-ca.pem > ldapca.crt
+docker exec ldapserver cat /container/service/:ssl-tools/assets/default-ca/default-ca.pem > ldapca.crt
 ```
 3. To enable external VM to secure access, need to add in `/etc/openldap/ldap.conf` the cacert and param to check certs
 ```
