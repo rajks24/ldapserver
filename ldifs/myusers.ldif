@@ -1,0 +1,54 @@
+# Entry 3: ou=Groups,dc=txvlab,dc=local
+dn: ou=Groups,dc=txvlab,dc=local
+objectclass: organizationalUnit
+objectclass: top
+ou: Groups
+
+# Entry 4: cn=Artists,ou=Groups,dc=txvlab,dc=local
+dn: cn=Artists,ou=Groups,dc=txvlab,dc=local
+cn: Artists
+gidnumber: 5000
+objectclass: posixGroup
+objectclass: top
+
+# Entry 5: ou=People,dc=txvlab,dc=local
+dn: ou=People,dc=txvlab,dc=local
+objectclass: organizationalUnit
+objectclass: top
+ou: People
+
+# Entry 6: uid=ben,ou=People,dc=txvlab,dc=local
+dn: uid=ben,ou=People,dc=txvlab,dc=local
+cn: Ben Affleck
+displayname: Ben
+gecos: Ben Affleck
+gidnumber: 5000
+givenname: Ben
+homedirectory: USERDIRECTORY1
+loginshell: /bin/bash
+objectclass: inetOrgPerson
+objectclass: posixAccount
+objectclass: shadowAccount
+objectclass: top
+sn: Affleck
+uid: ben
+uidnumber: 10001
+userpassword: benspassword
+
+# Entry 7: uid=bob,ou=People,dc=txvlab,dc=local
+dn: uid=bob,ou=People,dc=txvlab,dc=local
+cn: Bob Marley
+displayname: Bob
+gecos: Bob Marley
+gidnumber: 5000
+givenname: Bob
+homedirectory: USERDIRECTORY2
+loginshell: /bin/bash
+objectclass: inetOrgPerson
+objectclass: posixAccount
+objectclass: shadowAccount
+objectclass: top
+sn: Marley
+uid: bob
+uidnumber: 10002
+userpassword: bobspassword
