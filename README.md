@@ -1,6 +1,6 @@
-# LDAP Server setup with docker-compose
+# LDAP Server setup
 
-This project aims to build an LDAP Server setup with docker-compose. Within this project, the *phpldapadmin* is integrated with the *openldap* so that, LDAP management can be performed seamlessly.
+This project aims to build an LDAP Server setup with docker and docker-compose. Within this project, the *phpldapadmin* is integrated with the *openldap* so that, LDAP management can be performed seamlessly.
 
 ## Features
 - Lightweight ldap server
@@ -11,6 +11,7 @@ This project aims to build an LDAP Server setup with docker-compose. Within this
 - Image versions
   - osixia/openldap:1.5.0
   - osixia/phpldapadmin:0.9.0
+- Ldapserver can also be run individually as container
 
 ##### Note
 This project uses the openldap image from https://github.com/osixia/docker-openldap.git
