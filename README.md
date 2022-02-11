@@ -78,8 +78,8 @@ LDAP_SEED_INTERNAL_LDIF_PATH=/openldap/ldif
 **username:** cn=admin,dc=txvlab,dc=local
 **password:** pass123
 
-## Accessing ldapserver with docker
-The server is packed with the environment variables and the users/groups from the `ldif/myusers.ldif` into a docker image - `ghcr.io/rajks24/ldapserver:1.0`.
+## Access ldapserver with docker
+The server is packed with the environment variables and the users/groups from the `ldif/myusers.ldif` into a docker image - **ghcr.io/rajks24/ldapserver:1.0**.
 We can access the image with docker and use the ldapserver in poc's.
 ```
 $ docker pull ghcr.io/rajks24/ldapserver:1.0
