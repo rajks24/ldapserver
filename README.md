@@ -3,14 +3,17 @@
 This project aims to build an LDAP Server setup with docker-compose. Within this project, the *phpldapadmin* is integrated with the *openldap* so that, LDAP management can be performed seamlessly.
 
 ## Features
-- lightweight ldap server
+- Lightweight ldap server
 - Environment variables to manage mandatory ldap params
 - Ldapserver insecure and secure access
 - Add/modify the user and groups in server
 - Console to manage LDAPserver
-- image versions
+- Image versions
   - osixia/openldap:1.5.0
   - osixia/phpldapadmin:0.9.0
+
+##### Note
+This project uses the openldap image from https://github.com/osixia/docker-openldap.git
 
 ## Commands
 To access ldapserver externally
@@ -64,14 +67,38 @@ LDAP_SEED_INTERNAL_LDIF_PATH=/openldap/ldif
 
 ## Exposed ports
 
-**LDAP** : 389
-**LDAPS**: 636
-**phpldapadmin console** : 8000
+**LDAP:** 389
+**LDAPS:** 636
+**phpldapadmin console:** 8000
 
 ## Access phpldapadmin console
+
 **URL:** http://ldapserver.txvlab.local:8000
 **username:** cn=admin,dc=txvlab,dc=local
 **password:** pass123
 
+## Accessing ldapserver with docker
+The server is packed with the environment variables and the users/groups from the `ldif/myusers.ldif` into a docker image - `ghcr.io/rajks24/ldapserver:1.0`.
+We can access the image with docker and use the ldapserver in poc's.
+```
+$ docker pull ghcr.io/rajks24/ldapserver:1.0
+1.0: Pulling from rajks24/ldapserver
+433ab23181ef: Pull complete
+Digest: sha256:a6e702120b8c506f9df3829da8f0ff933de10621eb19d81f8276b4a7c0115cad
+Status: Downloaded newer image for ghcr.io/rajks24/ldapserver:1.0
+ghcr.io/rajks24/ldapserver:1.0
+
+$ docker run -d --rm --name ldapserver -p 389:389 -p 636:636 ghcr.io/rajks24/ldapserver:1.0
+$ ldapsearch -x -b "dc=txvlab,dc=local" -H ldaps://ldapserver:636 -D "cn=user-ro,dc=txvlab,dc=local" -w pass123
+```
+
+#### Note
+For secure access, we can use the cacert from repo or copy from running container from `/container/service/:ssl-tools/assets/default-ca/default-ca.pem`.
+Also we can configure in `/etc/openldap/ldap.conf`.
+```
+TLS_CACERT /root/ldapserver/certs/ldapca.crt
+TLS_REQCERT demand
+```
+
 ## Troubleshooting 
-As the ldapserver is running within container, but to access externally, the hostname or domainname for host would be used. Thus, need to ensure that host machine has matching hostname or the domain-name should be resolvable to *ldapserver*.
+As the ldapserver is running within container, but to access externally, the hostname or domainname for host would be used. Thus, need to ensure that the hostname or domain-name of VM should be resolvable to *ldapserver*. It's also important as the ldapserver cert configures the SubjectAltName to the *ldapserver*.
